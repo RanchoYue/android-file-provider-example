@@ -62,14 +62,13 @@ public class MainActivity extends AppCompatActivity {
             InputStream in = null;
             OutputStream out = null;
             try {
-                in = assetManager.open(folderInsideAssets +"/" + filename);
+                in = assetManager.open(folderInsideAssets + "/" + filename);
                 File outFile = new File(getExternalFilesDir(null), filename);
-                copyFile(in,outFile);
+                copyFile(in, outFile);
 
-            } catch(IOException e) {
+            } catch (IOException e) {
                 Log.e("tag", "Failed to copy asset file: " + filename, e);
-            }
-            finally {
+            } finally {
                 if (in != null) {
                     try {
                         in.close();
@@ -82,11 +81,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void copyFile(InputStream in, File dst) throws IOException {
-        FileOutputStream out=new FileOutputStream(dst);
-        byte[] buf=new byte[1024];
+        FileOutputStream out = new FileOutputStream(dst);
+        byte[] buf = new byte[1024];
         int len;
 
-        while ((len=in.read(buf)) > 0) {
+        while ((len = in.read(buf)) > 0) {
             out.write(buf, 0, len);
         }
 
@@ -108,10 +107,10 @@ public class MainActivity extends AppCompatActivity {
             intent.setDataAndType(fileUri, "application/pdf");
             intent.setFlags(FLAG_GRANT_READ_URI_PERMISSION | FLAG_GRANT_WRITE_URI_PERMISSION);
             startActivity(intent);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Log.e("tag", "Failed to open file: " + filename, e);
-            Toast.makeText(this, "df "+e.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "df " + e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
